@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  rival-landing:
+    image: server-ci:v1.0
+    container_name: rival-landing
+    restart: always
+    # env_file:
+    #   - .env
+    volumes:
+      - "${RIVALLANDING_PATH}:/var/www"
+    entrypoint:
+      - sh
+      - -c
+      - |
+        set -e
+
+        composer install --verbose --prefer-dist --no-progress --no-interaction --no-suggest --optimize-autoloader
+        /docker-entrypoint.sh
+    ports:
+      - "${RIVALLANDING_PORT}:8100"
+    expose:
+      - "9000"
+      - "8100"
+    working_dir: /var/www
+    networks:
+      - rival-net
+
+networks:
+  rival-net:
+    external: true
