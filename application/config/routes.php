@@ -54,8 +54,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $route['login'] = 'auth/login';
 
 // Soon
-$route['soon'] = 'soon';
+// $route['soon'] = 'soon';
 
-$route['default_controller'] = 'welcome';
+$route['default_controller'] = 'soon';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
