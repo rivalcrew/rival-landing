@@ -3,7 +3,7 @@
 function appVersion()
 {
     $versionNo = '1.0.0';
-    return $version = (strpos(base_url(), 'localhost') !== false) || (strpos(base_url(), 'demo') !== false) ? 'Demo Version ' . $versionNo : 'Version ' . $versionNo;
+    return (strpos(base_url(), 'localhost') !== false) || (strpos(base_url(), 'demo') !== false) ? 'Demo Version ' . $versionNo : 'Version ' . $versionNo;
 }
 
 function debugPrint($data)

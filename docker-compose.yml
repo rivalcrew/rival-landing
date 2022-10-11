@@ -2,7 +2,7 @@ version: '3'
 
 services:
   rival-landing:
-    image: server-ci:v1.0
+    image: server-ci:v1.1
     container_name: rival-landing
     restart: always
     # env_file:
