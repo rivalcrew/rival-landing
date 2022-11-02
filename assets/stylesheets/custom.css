@@ -1,1 +1,6 @@
 /* put your own styles to customize and override the theme */
+.custom {
+    width: 130px !important;
+    background-color: red;
+    border-color: red;
+}

@@ -9,163 +9,94 @@ class Auth extends CI_Controller
         date_default_timezone_set('Asia/Kuala_Lumpur');
     }
 
-    public function login() 
+    public function login()
     {
         $data['title'] = 'Login';
-		$data['description'] = 'This is login page';
-		$data['page'] = 'auth/login';
+        $data['header'] = 'Admin Login';
+        $data['description'] = 'Login';
+        $data['page'] = 'auth/login';
+        $data['session'] = $this->session->userdata('logged_in');
 
-		$this->load->view('public/template/auth', $data);
+        if ($data['session'] && $data['session']['level_id'] == '1') {
+            redirect('admin/dashboard');
+        } else $this->load->view('public/template/auth', $data);
     }
 
-    // public function admin_login()
-    // {
-    //     $data['page'] = 'admin/login';
-    //     $data['title'] = 'Log Masuk Admin';
-    //     $data['session'] = $this->session->userdata('logged_in');
+    public function register()
+    {
+        $data['title'] = 'Register';
+        $data['header'] = 'Admin Registration';
+        $data['description'] = 'Register';
+        $data['page'] = 'auth/register';
+        $data['session'] = $this->session->userdata('logged_in');
 
-    //     if ($data['session'] && $data['session']['level_id'] == '1' || $data['session']['level_id'] == '2') {
-    //         redirect('admin/dashboard');
-    //     } else if ($data['session'] && $data['session']['level_id'] == '4') {
-    //         redirect('jemaah/dashboard');
-    //     } else $this->load->view('public/template/auth', $data);
-    // }
+        if ($data['session'] && $data['session']['level_id'] == '1') {
+            redirect('admin/dashboard');
+        } else $this->load->view('public/template/auth', $data);
+    }
 
-    // public function admin_login_form()
-    // {
-    //     $this->form_validation->set_rules('admin_username', 'Username', 'trim|required|xss_clean');
-    //     $this->form_validation->set_rules('admin_password', 'Password', 'trim|required');
+    public function login_form()
+    {
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required');
 
-    //     if ($this->form_validation->run() == TRUE) {
-    //         $username = $this->input->post('admin_username');
-    //         $password = $this->input->post('admin_password');
+        if ($this->form_validation->run() == TRUE) {
 
-    //         $result = $this->Admin_model->checkAdmin($username, $password);
-    //         if ($result > 0) {
-    //             if ($result['admin_status'] == 'active') {
-    //                 $this->session->set_userdata('logged_in', $result);
-    //                 redirect('admin/dashboard');
-    //             } else {
-    //                 $message = 'Akaun anda belum aktif, sila hubungi Admin untuk mengesahkan !!';
-    //                 $this->session->set_flashdata('message', json_encode(array('status' => false, 'title' => 'Perlu disahkan', 'msg' => $message)));
-    //                 redirect(base_url('admin/login'));
-    //             }
-    //         } else {
-    //             $message = 'Tiada rekod ditemui, sila hubungi Admin !!';
-    //             $this->session->set_flashdata('message', json_encode(array('status' => false, 'title' => 'Gagal log masuk', 'msg' => $message)));
-    //             redirect(base_url('admin/login'));
-    //         }
-    //     } else $this->admin_login();
-    // }
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
 
-    // public function admin_register()
-    // {
-    //     $data['page'] = 'admin/register';
-    //     $data['title'] = 'Pendaftaran Admin';
-    //     $data['session'] = $this->session->userdata('logged_in');
+            $result = $this->User_model->checkUser($username, $password);
 
-    //     if ($data['session'] && $data['session']['level_id'] == '1' || $data['session']['level_id'] == '2') {
-    //         redirect('admin/dashboard');
-    //     } else if ($data['session'] && $data['session']['level_id'] == '4') {
-    //         redirect('jemaah/dashboard');
-    //     } else $this->load->view('public/template/auth', $data);
-    // }
+            if ($result > 0) {
+                if ($result['status'] == 'active') {
+                    $this->session->set_userdata('logged_in', $result);
+                    redirect('dashboard');
+                } else {
+                    $message = 'Your account is not active, please contact Admin to confirm !';
+                    $this->session->set_flashdata('message', json_encode(array('status' => false, 'title' => 'Need to be confirmed', 'msg' => $message)));
+                    redirect(base_url('login'));
+                }
+            } else {
+                $message = 'No record found !';
+                $this->session->set_flashdata('message', json_encode(array('status' => false, 'title' => 'Login Failed', 'msg' => $message)));
+                redirect(base_url('login'));
+            }
+        } else $this->login();
+    }
 
-    // public function admin_register_form()
-    // {
-    //     $this->form_validation->set_rules('admin_name', 'Nama Penuh', 'trim|required|min_length[3]|max_length[50]|xss_clean');
-    //     $this->form_validation->set_rules('admin_email', 'Alamat Email', 'trim|valid_email|is_unique[admin.admin_email]|xss_clean');
-    //     $this->form_validation->set_rules('admin_username', 'Username', 'trim|required|is_unique[admin.admin_username]|min_length[3]|max_length[30]|xss_clean');
-    //     $this->form_validation->set_rules('admin_password', 'Password', 'trim|required|md5');
-    //     $this->form_validation->set_rules('admin_cpassword', 'Confirm Password', 'trim|required|matches[admin_password]|md5');
-    //     $this->form_validation->set_message('is_unique', 'Sorry, {field} has been taken.');
+    public function register_form()
+    {
+        $this->form_validation->set_rules('name', 'Full Name', 'trim|required|min_length[3]|max_length[50]|xss_clean');
+        $this->form_validation->set_rules('email', 'Email Address', 'trim|valid_email|is_unique[users.email]|xss_clean');
+        $this->form_validation->set_rules('username', 'Username', 'trim|required|is_unique[users.username]|min_length[3]|max_length[30]|xss_clean');
+        $this->form_validation->set_rules('password', 'Password', 'trim|required|md5');
+        $this->form_validation->set_rules('confirm_password', 'Confirm Password', 'trim|required|matches[password]|md5');
+        $this->form_validation->set_message('is_unique', 'Sorry, {field} has been taken.');
 
-    //     if ($this->form_validation->run() == TRUE) {
-    //         $data = array(
-    //             'admin_name' => $this->input->post('admin_name'),
-    //             'admin_mobileNo' => $this->input->post('admin_mobileNo'),
-    //             'admin_email' => $this->input->post('admin_email'),
-    //             'admin_username' => $this->input->post('admin_username'),
-    //             'admin_password' => $this->input->post('admin_password'),
-    //             'admin_status' => 'inactive',
-    //             'level_id' => '2'
-    //         );
+        if ($this->form_validation->run() == TRUE) {
+            $data = array(
+                'name'      => $this->input->post('name'),
+                'email'     => $this->input->post('email'),
+                'username'  => $this->input->post('username'),
+                'mobileNo'  => $this->input->post('mobileNo'),
+                'password'  => $this->input->post('password'),
+                'status'    => 'inactive',
+                'level_id'  => '2'
+            );
 
-    //         $result = $this->Admin_model->addAdmin($data);
-    //         if ($result) {
-    //             $message = 'Admin baru berjaya didaftarkan, sila log masuk untuk meneruskan !!';
-    //             $this->session->set_flashdata('message', json_encode(array('status' => true, 'title' => 'Berjaya Daftar', 'msg' => $message)));
-    //             redirect(base_url('admin/login'));
-    //         }
-    //     } else $this->admin_register();
-    // }
+            $result = $this->User_model->addUser($data);
 
-    // public function admin_logout()
-    // {
-    //     $this->session->sess_destroy();
-    //     redirect(base_url('admin/login'));
-    // }
+            if ($result) {
+                $message = 'New admin successfully registered, please log in to continue !';
+                $this->session->set_flashdata('message', json_encode(array('status' => true, 'title' => 'Successfully Registered', 'msg' => $message)));
+                redirect(base_url('login'));
+            }
+        } else $this->register();
+    }
 
-    // public function qariah_login()
-    // {
-    //     $data['page'] = 'qariah/login';
-    //     $data['title'] = 'Carian Ahli Kariah';
-    //     $data['session'] = $this->session->userdata('logged_in');
-    //     $data['modal'] = 'modal_qariah_info';
-
-    //     if ($data['session'] && $data['session']['level_id'] == '1' || $data['session']['level_id'] == '2') {
-    //         redirect('admin/dashboard');
-    //     } else if ($data['session'] && $data['session']['level_id'] == '4') {
-    //         redirect('jemaah/dashboard');
-    //     } else $this->load->view('public/template/auth', $data);
-    // }
-
-    // public function qariah_login_form()
-    // {
-    //     $this->form_validation->set_rules('qariah_idNo', 'ID/IC No.', 'trim|required|exact_length[14]|xss_clean');
-    //     if ($this->form_validation->run() == TRUE) {
-
-    //         $qariah_idNo = $this->input->post('qariah_idNo');
-    //         $result = $this->Qariah_model->checkQariahByIdNo($qariah_idNo);
-
-    //         if ($result > 0) {
-    //             if ($result['qa_status'] == 'active') {
-    //                 $this->session->set_flashdata(
-    //                     'qariah_details',
-    //                     json_encode(
-    //                         array(
-    //                             'qa_id' => $result['qa_id'],
-    //                             'qa_name' => $result['qa_name'],
-    //                             'qa_idNo' => $result['qa_idNo'],
-    //                             'qa_email' => $result['qa_email'],
-    //                             'qa_mobileNo' => $result['qa_mobileNo'],
-    //                             'qa_mobileHomeNo' => $result['qa_mobileHomeNo'],
-    //                             'qa_maritalStatus' => ucwords($result['qa_maritalStatus']),
-    //                             'qa_address' => $result['qa_address'] . ' ' . $result['qa_postcode'] . ' ' . $result['qa_city'] . ' ' . $result['qa_state'],
-    //                             'qa_periodResidency' => $result['qa_periodResidency'],
-    //                             'qa_status' => ucwords($result['qa_status']),
-    //                             'qa_created_at' => date('d-m-Y, g:i A', strtotime($result['qa_created_at']))
-    //                         )
-    //                     )
-    //                 );
-    //                 //redirect(base_url('kariah/login'));
-    //                 redirect(base_url('/'));
-    //             } else {
-    //                 $message = 'Akaun anda belum aktif, sila hubungi Admin untuk mengesahkan !!';
-    //                 $this->session->set_flashdata('message', json_encode(array('status' => false, 'title' => 'Perlu disahkan', 'msg' => $message)));
-
-    //                 //redirect(base_url('kariah/login'));
-    //                 redirect(base_url('/'));
-    //             }
-    //         } else {
-    //             $message = 'Tiada rekod ahli kariah ditemui, sila hubungi Admin !!';
-    //             $this->session->set_flashdata('message', json_encode(array('status' => false, 'title' => 'Gagal cari maklumat', 'msg' => $message)));
-
-    //             //redirect(base_url('kariah/login'));
-    //             redirect(base_url('/'));
-    //         }
-    //     } else $this->qariah_login();
-    // }
-
-    
+    public function logout()
+    {
+        $this->session->sess_destroy();
+        redirect(base_url('login'));
+    }
 }

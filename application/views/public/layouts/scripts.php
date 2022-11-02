@@ -10,6 +10,8 @@
 <script src="<?= base_url() ?>assets/vendor/stacked-menu/js/stacked-menu.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/perfect-scrollbar/perfect-scrollbar.min.js"></script>
 <script src="<?= base_url() ?>assets/vendor/particles.js/particles.js"></script>
+<script src="<?= base_url() ?>assets/vendor/aos/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.3.4/jquery.inputmask.bundle.min.js"></script>
 <script>
     /**
      * Keep in mind that your scripts may not always be executed after the theme is completely ready,
@@ -21,6 +23,7 @@
     })
 </script>
 <script>
+    // need to remove this after landing finish
     /**
      * Keep in mind that your scripts may not always be executed after the theme is completely ready,
      * you might need to observe the `theme:load` event to make sure your scripts are executed after the theme is ready.

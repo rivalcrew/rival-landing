@@ -20,7 +20,7 @@
     <!-- ===============================================-->
     <!-- Stylesheets -->
     <!-- ===============================================-->
-    <?php $this->load->view('public/layouts/styles') ?>
+    <?php $this->load->view('public/layouts/landing/styles') ?>
 </head>
 
 <body>
@@ -31,12 +31,21 @@
     <!-- ===============================================-->
     <!-- Pages -->
     <!-- ===============================================-->
-    <main id="comingsoon" class="empty-state empty-state-fullpage bg-primary text-white" style="background-image: url(assets/icons/rival/bg-01.jpg);">
+    <main class="app app-site" style="background-image: url(assets/icons/rival/bg-01.jpg);  height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+        <!-- ===============================================-->
+        <!-- Navbar -->
+        <!-- ===============================================-->
+        <?php $this->load->view('public/layouts/navbar') ?>
 
         <!-- ===============================================-->
         <!-- Pages -->
         <!-- ===============================================-->
         <?php if (isset($page)) $this->load->view('public/pages/' . $page) ?>
+
+        <!-- ===============================================-->
+        <!-- Modals -->
+        <!-- ===============================================-->
+        <?php $this->load->view('public/modals/notification')?>
     </main>
 
     <!-- ===============================================-->
@@ -46,7 +55,7 @@
     <!-- ===============================================-->
     <!-- JavaScripts -->
     <!-- ===============================================-->
-    <?php $this->load->view('public/layouts/scripts') ?>
+    <?php $this->load->view('public/layouts/landing/scripts') ?>
 </body>
 
 </html>

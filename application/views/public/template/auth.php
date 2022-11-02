@@ -43,6 +43,11 @@
         <?php if (isset($page)) $this->load->view('public/pages/' . $page) ?>
 
         <!-- ===============================================-->
+        <!-- Modals -->
+        <!-- ===============================================-->
+        <?php $this->load->view('public/modals/notification')?>
+
+        <!-- ===============================================-->
         <!-- Footer -->
         <!-- ===============================================-->
         <?php $this->load->view('public/layouts/auth/footer') ?>
@@ -55,7 +60,7 @@
     <!-- ===============================================-->
     <!-- JavaScripts -->
     <!-- ===============================================-->
-    <?php $this->load->view('public/layouts/scripts') ?>
+    <?php $this->load->view('public/layouts/auth/scripts') ?>
 </body>
 
 </html>
