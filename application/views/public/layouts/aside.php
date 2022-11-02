@@ -12,8 +12,8 @@
                     <span class="fa fa-caret-down fa-lg"></span>
                 </span>
                 <span class="account-summary">
-                    <span class="account-name">John Doe</span>
-                    <span class="account-description">@johndoe</span>
+                    <span class="account-name"><?= ucfirst($session['name']) ?></span>
+                    <span class="account-description"><?= $session['level_id'] == 1 ? 'Superadmin' : 'Admin' ?></span>
                 </span>
             </button>
             <!-- /.btn-account -->
@@ -23,11 +23,8 @@
                 <!-- dropdown-items -->
                 <div class="pb-3">
                     <a class="dropdown-item" href="#"><span class="dropdown-icon oi oi-person"></span> Profile</a>
-                    <a class="dropdown-item" href="#"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Help Center</a>
-                    <a class="dropdown-item" href="#">Ask Forum</a>
-                    <a class="dropdown-item" href="#">Keyboard Shortcuts</a>
+                    <!-- <div class="dropdown-divider"></div> -->
+                    <a class="dropdown-item" href="<?= base_url('logout') ?>"><span class="dropdown-icon oi oi-account-logout"></span> Logout</a>
                 </div>
                 <!-- /dropdown-items -->
             </div>
@@ -54,7 +51,8 @@
         <!-- /.aside-menu -->
         <!-- Skin changer -->
         <footer class="aside-footer border-top p-2">
-            <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button>
+            <!-- <button class="btn btn-light btn-block text-primary" data-toggle="skin"><span class="d-compact-menu-none">Night mode</span> <i class="fas fa-moon ml-1"></i></button> -->
+            <span class="d-compact-menu-none"><?= appVersion() ?></span>
         </footer><!-- /Skin changer -->
     </div>
     <!-- /.aside-content -->

@@ -2,7 +2,7 @@
 
 function appVersion()
 {
-    $versionNo = '1.0.0';
+    $versionNo = getenv('APP_VERSION');
     return (strpos(base_url(), 'localhost') !== false) || (strpos(base_url(), 'demo') !== false) ? 'Demo Version ' . $versionNo : 'Version ' . $versionNo;
 }
 
@@ -15,7 +15,7 @@ function debugPrint($data)
 
 function state()
 {
-    return $state = array(
+    return array(
         'Selangor' => 'Selangor',
         'Johor' => 'Johor',
         'Kedah' => 'Kedah',
@@ -35,7 +35,7 @@ function state()
 
 function city()
 {
-    return $city = array(
+    return array(
         // SELANGOR
         'Shah Alam' => 'Shah Alam',
         'Klang' => 'Klang',
@@ -220,4 +220,15 @@ function city()
         'Labuan' => 'Labuan',
         'Putrajaya' => 'Putrajaya',
     );
+}
+
+function random_username($string)
+{
+    $pattern = " ";
+    $firstPart = strstr(strtolower($string), $pattern, true);
+    $secondPart = substr(strstr(strtolower($string), $pattern, false), 0, 3);
+    $nrRand = rand(0, 100);
+
+    $username = trim($firstPart) . trim($secondPart) . trim($nrRand);
+    return $username;
 }
