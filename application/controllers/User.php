@@ -15,7 +15,8 @@ class User extends CI_Controller
         $data['description'] = 'Dashboard';
         $data['page'] = 'user/dashboard';
         $data['session'] = $this->session->userdata('logged_in');
-
+        $data['listTeam'] = $this->User_model->listTeam();
+        
         if ($data['session'] && $data['session']['level_id'] == '1' || $data['session']['level_id'] == '2') {
             $this->load->view('public/template/default', $data);
         } else redirect('login');
