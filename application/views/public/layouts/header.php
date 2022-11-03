@@ -6,7 +6,7 @@
             <!-- toggle aside menu -->
             <button class="hamburger hamburger-squeeze mr-2" type="button" data-toggle="aside-menu" aria-label="toggle aside menu"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> <!-- /toggle aside menu -->
             <a href="/">
-                <img src="<?= base_url() ?>assets/icons/rival/rival-01.png" height="32px" alt="">
+                <img src="<?= base_url() ?>assets/icons/rival/rival-02.png" height="60px" alt="">
             </a>
         </div>
         <!-- /.top-bar-brand -->
