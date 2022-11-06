@@ -6,7 +6,7 @@
          <!-- <button class="hamburger hamburger-squeeze hamburger-light d-flex d-lg-none" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation"><span class="hamburger-box"><span class="hamburger-inner"></span></span></button> -->
          <!-- /.hamburger -->
          <!-- .navbar-brand -->
-         <a class="navbar-brand me-auto mr-0" href="<?= base_url() ?>"><img class="rounded" src="<?= base_url() ?>assets/icons/rival/rival-02.png" height="100"></a>
+         <a class="navbar-brand me-auto mr-0" href="<?= base_url() ?>"><img class="rounded" src="<?= base_url() ?>assets/icons/rival/rival-02.png" height="90"></a>
          <!-- /.navbar-brand -->
          <!-- <a class="navbar-btn btn btn-subtle-primary ml-auto order-lg-2" href="https://themes.getbootstrap.com/product/looper-responsive-admin-template" target="_blank">Purchase now</a> .navbar-collapse -->
          <!-- <div class="navbar-collapse collapse" id="navbarTogglerDemo01">

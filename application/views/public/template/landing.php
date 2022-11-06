@@ -21,6 +21,13 @@
     <!-- Stylesheets -->
     <!-- ===============================================-->
     <?php $this->load->view('public/layouts/landing/styles') ?>
+
+    <!-- ===============================================-->
+    <!--    Google Analytics-->
+    <!-- ===============================================-->
+    <?php if (strpos(base_url(), 'rivalmy.com') !== false) { ?>
+        <?php $this->load->view('public/layouts/ga') ?>
+    <?php } ?>
 </head>
 
 <body>
@@ -45,7 +52,7 @@
         <!-- ===============================================-->
         <!-- Modals -->
         <!-- ===============================================-->
-        <?php $this->load->view('public/modals/notification')?>
+        <?php $this->load->view('public/modals/notification') ?>
     </main>
 
     <!-- ===============================================-->

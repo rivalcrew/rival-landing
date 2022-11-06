@@ -21,6 +21,13 @@
     <!-- Stylesheets -->
     <!-- ===============================================-->
     <?php $this->load->view('public/layouts/styles') ?>
+
+    <!-- ===============================================-->
+    <!--    Google Analytics-->
+    <!-- ===============================================-->
+    <?php if (strpos(base_url(), 'rivalmy.com') !== false) { ?>
+        <?php $this->load->view('public/layouts/ga') ?>
+    <?php } ?>
 </head>
 
 <body>
