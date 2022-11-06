@@ -20,8 +20,8 @@ class Soon extends CI_Controller
 
     public function landing()
     {
-        $data['title'] = 'Landing';
-        $data['description'] = 'Landing';
+        $data['title'] = 'Home';
+        $data['description'] = 'Home';
         $data['page'] = 'landing';
 
         $this->load->view('public/template/landing', $data);
