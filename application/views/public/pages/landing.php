@@ -6,8 +6,8 @@
             </div> -->
             <div class="col-12 col-md-6 order-md-1" data-aos="fade-in">
                 <div class="col-fix pl-xl-3 ml-auto text-center text-sm-left">
-                    <h1 class="display-4 enable-responsive-font-size mb-4 text-light"> Hello, <strong>I'm Azim</strong></h1>
-                    <p class="lead text-muted mb-5"> Representing Anakantoo FC. Find us on Rival Platform to challenge us for game.</p>
+                    <h1 class="display-4 enable-responsive-font-size mb-4 text-light"> Hello, <strong>I'm <?= getenv('REP_NAME') ?></strong></h1>
+                    <p class="lead text-muted mb-5"> Representing <?= getenv('REP_TEAM') ?>. Find us on Rival Platform to challenge us for game.</p>
 
                     <?php
 

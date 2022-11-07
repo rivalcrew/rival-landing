@@ -38,7 +38,7 @@
     <!-- ===============================================-->
     <!-- Pages -->
     <!-- ===============================================-->
-    <main class="app app-site" style="background-image: url(assets/icons/rival/bg-01.jpg);  height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
+    <main class="app app-site" style="background-image: url(assets/icons/rival/bg-02.jpeg);  height: 100%; background-position: center; background-repeat: no-repeat; background-size: cover;">
         <!-- ===============================================-->
         <!-- Navbar -->
         <!-- ===============================================-->
